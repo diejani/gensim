@@ -172,7 +172,9 @@ def _load_word2vec_format(cls, fname, fvocab=None, binary=False, encoding='utf8'
     logger.info("loading projection weights from %s", fname)
     with utils.smart_open(fname) as fin:
         header = utils.to_unicode(fin.readline(), encoding=encoding)
-        vocab_size, vector_size = (int(x) for x in header.split())  # throws for invalid file format
+        vocab_size, vector_size = (int(x) for x in header.split())  # throws for invalid file format 
+        #TODO add if else for other formats in case no header exists 
+        #TODO -> get dim from len(line.split()[1:]), size from counter +1 for line
         if limit:
             vocab_size = min(vocab_size, limit)
         result = cls(vector_size)
